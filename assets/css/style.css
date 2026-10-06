@@ -1,0 +1,13 @@
+<?php
+require_once __DIR__ . '/config.php';
+
+if (isset($_SESSION['user']['username'])) {
+    clear_remember_user($_SESSION['user']['username']);
+}
+
+session_unset();
+session_destroy();
+setcookie('secure_auth_remember', '', time() - 3600, '/');
+
+header('Location: index.php');
+exit;
